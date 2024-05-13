@@ -26,20 +26,22 @@ class DetailedBookDisplayStrategy implements BookDisplayStrategy {
 
 // State pattern implementation
 interface LibraryState {
-    void displayLibrary(Library library);
+    void displayLibrary(Library library, BookDisplayStrategy displayStrategy);
 }
 
 class OpenState implements LibraryState {
     @Override
-    public void displayLibrary(Library library) {
+    public void displayLibrary(Library library, BookDisplayStrategy displayStrategy) {
         System.out.println("Library is open. Displaying library inventory:");
-        library.displayLibrary();
+        for (Book book : library.getBooks()) {
+            displayStrategy.display(book);
+        }
     }
 }
 
 class ClosedState implements LibraryState {
     @Override
-    public void displayLibrary(Library library) {
+    public void displayLibrary(Library library, BookDisplayStrategy displayStrategy) {
         System.out.println("Sorry, the library is closed.");
     }
 }
@@ -62,8 +64,8 @@ class Library {
         books.add(book);
     }
 
-    public void displayLibrary() {
-        currentState.displayLibrary(this);
+    public void displayLibrary(BookDisplayStrategy displayStrategy) {
+        currentState.displayLibrary(this, displayStrategy);
     }
 
     public List<Book> getBooks() {
@@ -114,7 +116,7 @@ public class LibrarySystem {
 
         // Displaying library using simple display strategy
         System.out.println("Displaying Library with Simple Display Strategy:");
-        library.displayLibrary();
+        library.displayLibrary(simpleDisplayStrategy);
 
         // Changing library state to closed
         System.out.println("\nClosing the library...");
@@ -122,6 +124,6 @@ public class LibrarySystem {
 
         // Displaying library when it's closed
         System.out.println("\nDisplaying Library when it's closed:");
-        library.displayLibrary();
+        library.displayLibrary(simpleDisplayStrategy); // You can use either simpleDisplayStrategy or detailedDisplayStrategy here
     }
 }

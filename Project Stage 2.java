@@ -101,12 +101,12 @@ public class LibrarySystem {
         library.addBook(book3);
 
         // Creating a borrower and borrowing books
-        Borrower borrower = new Borrower("Alice");
+        Borrower borrower = new Borrower("Mohammed");
         borrower.borrowBook(book1);
         borrower.borrowBook(book2);
 
         // Creating a person
-        Person person = new Person("Bob");
+        Person person = new Person("Mohammed");
 
         // Displaying library inventory, borrower's borrowed books, and person's name
         library.displayLibrary();

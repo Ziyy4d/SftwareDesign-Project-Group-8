@@ -144,8 +144,6 @@ public class LibrarySystem {
 
         // Creating a library
         Library library = new Library();
-        library.addBook(book1);
-        library.addBook(book2);
         library.addBook(book3);
 
         // Decorator pattern: decorating borrowed books
